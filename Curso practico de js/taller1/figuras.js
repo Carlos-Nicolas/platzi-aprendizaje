@@ -21,8 +21,8 @@ console.groupEnd("Cuadrados")
 console.group("Triangulos")
 let ladoTriangulo1;
 let ladoTriangulo2;
-let  baseTriangulo;
-let  alturaTriangulo;
+let baseTriangulo;
+let alturaTriangulo;
 
 const perimetroTriangulo = (ladoTriangulo1, ladoTriangulo2, baseTriangulo) => {
     return ladoTriangulo1 + ladoTriangulo2 + baseTriangulo
@@ -39,9 +39,9 @@ console.groupEnd("Triangulos")
 // codigo Circulo
 console.group("Circulo")
 
-let  radioCirculo;
+let radioCirculo;
 
-const DiametroCirculo = (radioCirculo)=>{
+const DiametroCirculo = (radioCirculo) => {
     return radioCirculo * 2
 };
 // const PI =3.14;
@@ -58,3 +58,18 @@ const areaCirculo = (radioCirculo) => {
 
 
 console.groupEnd("Circulo")
+
+
+let calcularPerimetroCuadrado = () => {
+    const input = document.getElementById("InputCuadrado");
+    const value = input.value;
+    const permetro = perimetroCuadrado(value);
+    alert(permetro);
+}
+
+let calcularAreaCuadrado = () => {
+    const input = document.getElementById("InputCuadrado");
+    const value = input.value;
+    const area = areaCuadrado(value);
+    alert(area);
+}
