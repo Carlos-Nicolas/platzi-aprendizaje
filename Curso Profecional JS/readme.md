@@ -145,7 +145,7 @@ La keyword new crea un nuevo objeto que “hereda” todas las propiedades del p
       const link = Hero('Link');
       link.saludar();
 ```
-#### Object.create
+## Object.create
 
 ```js
 El método Object.create() crea un objeto nuevo, utilizando un objeto existente como el prototipo del nuevo objeto creado.
