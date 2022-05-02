@@ -72,3 +72,160 @@ Las funciones call, apply y bind son parte del prototipo Function. Toda función
 - functionName.apply(). Ejecuta la función recibiendo como primer argumento el this y como segundo un arreglo con los argumentos que recibe la función que llamó a apply.
 
 - functionName.bind(). Recibe como primer y único argumento el this. No ejecuta la función, sólo regresa otra función con el nuevo this integrado.
+
+# Prototype
+
+En Javascript todo son objetos, no tenemos clases, no tenemos ese plano para crear objetos.
+
+Todos los objetos “heredan” de un prototipo que a su vez hereda de otro prototipo y así sucesivamente creando lo que se llama la prototype chain.
+
+La keyword new crea un nuevo objeto que “hereda” todas las propiedades del prototype de otro objeto. No confundir prototype con proto que es sólo una propiedad en cada instancía que apunta al prototipo del que hereda.
+
+```js
+  // Un objeto común y corriente
+       const zelda = {
+         name: 'Zelda',
+       };
+
+       zelda.saludar = function() {
+         console.log(`Hola soy ${this.name}`);
+       };
+
+       zelda.saludar();
+
+       const link = {
+         name: 'Link',
+       };
+
+       link.saludar = function() {
+         console.log(`Hola soy ${this.name}`);
+       };
+
+       link.saludar();
+```
+### Seamos un poco más eficientes
+```js
+       
+       function Hero(name) {
+         const hero = {
+           name: name,
+         }
+         hero.saludar = function() {
+           console.log(`Hola soy ${this.name}`);
+         }
+         return hero;
+       }
+       const zelda = Hero('Zelda');
+       zelda.saludar()
+       const link = Hero('Link');
+       link.saludar();
+```
+
+###  Aun podemos mejorar más y evitar tener que crear la misma función cada vez
+
+```js
+
+      const heroMethods = {
+        saludar: function() {
+          console.log(`Me llamo ${this.name}`);
+        },
+      };
+
+      function Hero(name) {
+        const hero = {
+          name: name,
+        };
+        hero.saludar = heroMethods.saludar;
+        return hero;
+      }
+
+      const zelda = Hero('Zelda');
+      zelda.saludar();
+
+      const link = Hero('Link');
+      link.saludar();
+```
+#### Object.create
+
+```js
+El método Object.create() crea un objeto nuevo, utilizando un objeto existente como el prototipo del nuevo objeto creado.
+
+const nuevoObjeto = Object.create(objeto);
+```
+
+
+```js
+      const heroMethods = {
+        saludar: function() {
+          console.log(`Soy superheroe! ${this.name}`);
+        },
+      };
+
+      function Hero(name) {
+        const hero = Object.create(heroMethods);
+        //todas las propiedades de heroMethods ahora forman parte de este hero
+        hero.name = name;
+
+        return hero;
+      }
+
+      const zelda = Hero('Zelda');
+      zelda.saludar();
+
+      const link = Hero('Link');
+      link.saludar();
+```
+
+```js
+      // Los métodos de hero dentro de Hero
+      const heroMethods = {
+        saludar: function() {
+          console.log(`Soy superheroe! ${this.name}`);
+        },
+      };
+
+      function Hero(name) {
+        const hero = Object.create(Hero.prototype);
+        hero.name = name;
+
+        return hero;
+      }
+      Hero.prototype.saludar = function() {
+        console.log(`Soy superheroina! ${this.name}`);
+      };
+
+      const zelda = Hero('Zelda');
+      zelda.saludar();
+
+      const link = Hero('Link');
+      link.saludar();
+```
+
+
+```js
+      // new es un atajo (azucar sintactica) para llevar Hero.prototype al objeto que estamos creando
+      function Hero(name) {
+        // this = Object.create(Hero.prototype);
+        this.name = name;
+        // return this esto se da de manera implicita ;
+      }
+
+      Hero.prototype.saludar = function() {
+        console.log(`New: ${this.name}`);
+      };
+
+      const zelda = new Hero('Zelda');
+      zelda.saludar();
+
+      const link = new Hero('Link');
+      link.saludar();
+```
+
+
+# Herencia Prototipal
+
+Por default los objetos en JavaScript tienen cómo prototipo a Object que es el punto de partida de todos los objetos, es el prototipo padre. Object es la raíz de todo, por lo tanto tiene un prototipo padre undefined.
+
+Cuando se llama a una función o variable que no se encuentra en el mismo objeto que la llamó, se busca en toda la prototype chain hasta encontrarla o regresar undefined.
+
+La función hasOwnProperty sirve para verificar si una propiedad es parte del objeto o si viene heredada desde su prototype chain.
