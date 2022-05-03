@@ -229,3 +229,73 @@ Por default los objetos en JavaScript tienen cómo prototipo a Object que es el 
 Cuando se llama a una función o variable que no se encuentra en el mismo objeto que la llamó, se busca en toda la prototype chain hasta encontrarla o regresar undefined.
 
 La función hasOwnProperty sirve para verificar si una propiedad es parte del objeto o si viene heredada desde su prototype chain.
+
+```js
+function Hero(name) {
+        this.name = name;
+      }
+
+      Hero.prototype.saludar = function() {
+        console.log(`Hola, soy ${this.name}.`);
+      };
+
+      const zelda = new Hero('Zelda');
+
+      // propiedades de la instancia
+      console.log('Name:', zelda.name);
+      // propiedades de la "clase"
+      console.log('Saludar:', zelda.saludar);
+
+      // propiedades heredadas ej: toString
+      console.log('toString:', zelda.toString);
+
+      // hasOwnProperty (de dónde sale toString o esto?)
+      console.log(
+        'zelda.hasOwnProperty("saludar"):',
+        zelda.hasOwnProperty('saludar')
+      );
+```
+# Parsers y el Abstract Syntax Tree
+
+El JS Engine recibe el código fuente y lo procesa de la siguiente manera:
+
+- El parser descompone y crea tokens que integran el AST.
+- Se compila a bytecode y se ejecuta.
+- Lo que se pueda se optimiza a machine code y se reemplaza el código base.
+
+Un SyntaxError es lanzado cuando el motor JavaScript encuentra partes que no forman parte de la sintaxis del lenguaje y esto lo logra gracias a que se tiene un AST generado por el parser.
+
+El parser es del 15% al 20% del proceso de ejecución por lo que hay que usar parser del código justo en el momento que lo necesitamos y no antes de saber si se va a usar o no.
+
+# Event Loop
+
+El Event Loop hace que Javascript parezca ser multihilo a pesar de que corre en un solo proceso.
+
+Javascript se organiza usando las siguientes estructuras de datos:
+
+- **Stack.** Va apilando de forma organizada las diferentes instrucciones que se llaman. Lleva así un rastro de dónde está el programa, en que punto de ejecución nos encontramos.
+
+- **Memory Heap.** De forma desorganizada se guarda información de las variables y del scope.
+
+- **Schedule Tasks.** Aquí se agregan a la cola, las tareas programadas para su ejecución.
+
+- **Task Queue.** Aquí se agregan las tares que ya están listas para pasar al stack y ser ejecutadas. El stack debe estar vacío para que esto suceda.
+
+- **MicroTask Queue.** Aquí se agregan las promesas. Esta Queue es la que tiene mayor prioridad.
+
+El Event Loop es un loop que está ejecutando todo el tiempo y pasa periódicamente revisando las queues y el stack moviendo tareas entre estas dos estructuras.
+
+
+# Promesas
+
+Para crear las promesas usamos la clase Promise. El constructor de Promise recibe un sólo argumento, un callback con dos parámetros, resolve y reject. resolve es la función a ejecutar cuando se resuelve y reject cuando se rechaza.
+
+El async/await es sólo syntax sugar de una promesa, por debajo es exactamente lo mismo.
+
+La clase Promise tiene algunos métodos estáticos bastante útiles:
+
+```js
+Promise.all. Da error si una de las promesas es rechazada.
+
+Promise.race. Regresa sólo la promesa que se resuelva primero.
+```
