@@ -295,7 +295,13 @@ El async/await es sólo syntax sugar de una promesa, por debajo es exactamente l
 La clase Promise tiene algunos métodos estáticos bastante útiles:
 
 ```js
-Promise.all. Da error si una de las promesas es rechazada.
+Promise.all([p1,p2,p3]). Da error si una de las promesas es rechazada.// array de promesas
 
-Promise.race. Regresa sólo la promesa que se resuelva primero.
+Promise.race() Regresa sólo la promesa que se resuelva primero.// debuelve solo la promesa que se resuelva primero
 ```
+
+# Getters y setters
+
+Los getters y setters son funciones que podemos usar en un objeto para tener propiedades virtuales. Se usan los keywords set y get para crear estas propiedades.
+
+Estas propiedades al ser funciones pueden llevar una validación de por medio y ser usadas con el operador de asignación como si fueran una variable más dentro del objeto.
