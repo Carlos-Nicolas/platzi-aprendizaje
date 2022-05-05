@@ -305,3 +305,114 @@ Promise.race() Regresa sólo la promesa que se resuelva primero.// debuelve solo
 Los getters y setters son funciones que podemos usar en un objeto para tener propiedades virtuales. Se usan los keywords set y get para crear estas propiedades.
 
 Estas propiedades al ser funciones pueden llevar una validación de por medio y ser usadas con el operador de asignación como si fueran una variable más dentro del objeto.
+
+
+# Generators
+
+Los generadores son funciones especiales, pueden pausar su ejecución y luego volver al punto donde se quedaron recordando su scope.
+
+Algunas de sus características:
+
+- Los generadores regresan una función.
+- Empiezan suspendidos y se tiene que llamar next para que ejecuten.
+- Regresan un value y un boolean done que define si ya terminaron.
+- yield es la instrucción que regresa un valor cada vez que llamamos a next y detiene la ejecución del generador.
+
+```js
+  // Los generadores son funciones de las que se puede salir y volver a entrar.
+      // Su contexto (asociación de variables) será conservado entre las reentradas.
+      // Cada vez que llamamos next, la ejecución del generador va a continuar hasta el proximo yield
+      function* simpleGenerator() {
+        console.log('GENERATOR START');
+        yield 1;
+        yield 2;
+        yield 3;
+        console.log('GENERATOR END');
+      }
+
+      // const gen = simpleGenerator();
+
+      // Podemos hacer generadores infinitos.
+      function* idMaker() {
+        let id = 1;
+        while (true) {
+          yield id;
+          id = id + 1;
+        }
+      }
+
+      // Cuando llamamos next también podemos pasar valores que la función recibe.
+      function* idMakerWithReset() {
+        let id = 1;
+        let reset;
+        while (true) {
+          reset = yield id;
+          if (reset) {
+            id = 1;
+          } else {
+            id = id + 1;
+          }
+        }
+      }
+
+      // Ahora hagamos un ejemplo un poco más complejo: la secuencia fibonacci
+      function* fibonacci() {
+        let a = 1;
+        let b = 1;
+        while (true) {
+          const nextNumber = a + b;
+          a = b;
+          b = nextNumber;
+          yield nextNumber;
+        }
+      }
+```
+
+# Fetch - Cómo cancelar peticiones
+
+La peticiones AJAX permitieron en su tiempo hacer peticiones asíncronas al servidor sin tener que detener la carga de la página. Hoy en día se utiliza la función fetch para esto.
+
+Con fetch tenemos algo llamado AbortController que nos permite enviar una señal a una petición en plena ejecución para detenerla.
+
+```js
+const url =
+        'https://images.pexels.com/photos/974470/nature-stars-milky-way-galaxy-974470.jpeg?q=100';
+      const img = document.getElementById('huge-image');
+      const loadButton = document.getElementById('load');
+      const stopButton = document.getElementById('stop');
+      let controller;
+
+      function startLoading() {
+        loadButton.disabled = true;
+        loadButton.innerText = 'Loading...';
+        stopButton.disabled = false;
+      }
+
+      function stopLoading() {
+        loadButton.disabled = false;
+        loadButton.innerText = 'Load HUGE Image';
+        stopButton.disabled = true;
+      }
+
+      loadButton.onclick = async function() {
+        startLoading();
+
+        controller = new AbortController();
+
+        try {
+          const response = await fetch(url, { signal: controller.signal });
+          const blob = await response.blob(); // blob es el binario de la peticion 
+          const imgUrl = URL.createObjectURL(blob);
+          img.src = imgUrl;
+        } catch (error) {
+          console.log(error.message);
+        }
+
+        stopLoading();
+      };
+
+      stopButton.onclick = function() {
+        controller.abort();
+        stopLoading();
+      };
+```
