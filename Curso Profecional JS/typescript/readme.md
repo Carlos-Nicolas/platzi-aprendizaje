@@ -118,13 +118,13 @@ enum Color {
   Rojo = 'Rojo',
   Verde = 'Verde',
 }
-
+//con el signo de "?" le indicamos que esa propiedad es opcional
 interface Rectangulo {
   ancho: number;
   alto: number;
   color?: Color;
 }
-
+ //indicamos como tipado el nombre de la interfas para que sepa a que esta enlazado 
 let rect: Rectangulo = {
   ancho: 4,
   alto: 6,
@@ -144,3 +144,8 @@ rect.toString = function() {
 
 console.log(rect.toString());
 ```
+
+# clases
+
+
+
