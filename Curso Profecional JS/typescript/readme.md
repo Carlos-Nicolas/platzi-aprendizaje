@@ -145,7 +145,73 @@ rect.toString = function() {
 console.log(rect.toString());
 ```
 
-# clases
+# Clases
+
+# Patrones
+
+- **Creacionales.** Proveen diferentes mecanismos para crear objetos.
+
+- **Estructurales.** Describen formas de componer objetos para formar nuevas estructuras flexibles y eficientes.
+
+- **De Comportamiento.** Gestionan algoritmos y responsabilidades entre objetos.
+
+## Patron Singleton 
+
+Singleton es un patrón de diseño creacional que nos permite asegurarnos de que una clase tenga una única instancia, a la vez que proporciona un punto de acceso global a dicha instancia.
+
+```ts
+
+ class Singleton{
+    private static  instance :Singleton{
+        private constructor(){
+            //inicialisacion
+        }
+        // aqui creamos la intancia del singleton y solo  se puede crear aqui por que estamos dentro de la misma clase.
+        static getInstance(){
+            if(!Singleton.instance){
+                Singleton.instance = new Singleton()
+            }
+            return Singleton.instance;
+        }
+    }
+}
+
+export default Singleton ;
+```
+
+## Patron Observer
+
+**Observer** es un patrón de diseño de comportamiento que te permite definir un mecanismo de suscripción para notificar a varios objetos sobre cualquier evento que le suceda al objeto que están observando.
 
 
+```ts
+interface observer{
+    update (data: any)=>void,
+}
 
+interface Subject {
+suscribe: (observer: Observer) => void,
+unsubscribe: (observer: Observer) => void, ;
+}
+
+class BitcoinPrice implements Subject {
+
+    observers: Observer[] = [] ;
+
+    suscribe (observer: Observer ){
+        this.observers.push(observer);
+    },
+    
+    unsusbcribe (observers: Observer){
+        const index =this.observers.findIndex(obs => {
+        return obs === observer 
+        })
+        this.observers.splice(index,1);
+    }
+
+    notify ( data: any ){
+        this.observers.forEach(observer => observer.update(data))
+    }
+}
+
+```
