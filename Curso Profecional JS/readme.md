@@ -1,7 +1,7 @@
 
 # Scripts
 
-El **DOM **es la representación que hace el navegador de un documento HTML.
+El **DOM** es la representación que hace el navegador de un documento HTML.
 
 El navegador interpreta el archivo HTML y cuando termina de transformarlo al DOM se dispara el evento DOMContentLoaded lo que significa que todo el documento está disponible para ser manipulado.
 
@@ -12,7 +12,8 @@ Tanto con async como defer podemos hacer llamados asíncronos pero tiene sus dif
 - async. Con async podemos hacer la petición de forma asíncrona y no vamos a detener la carga del DOM hasta que se haga la ejecución del código.
 
 - defer. La petición es igual asíncrona como en el async pero va a deferir la ejecución del Javascript hasta el final de que se cargue todo el documento.
-```
+
+```sh
 Nota : Hay que tener en cuenta que cuando carga una página y se encuentra un script a ejecutar toda la carga se detiene. Por eso se recomienda agregar tus scripts justo antes de cerrar el body para que todo el documento esté disponible.
 ```
 
@@ -49,7 +50,7 @@ function iniciar() {
 }
 iniciar();  
 ```
-# this
+# This
 
 this se refiere a un objeto, ese objeto es el que actualmente está ejecutando un pedazo de código.
 
@@ -120,6 +121,44 @@ Las funciones call, apply y bind son parte del prototipo Function. Toda función
 - functionName.apply(). Ejecuta la función recibiendo como primer argumento el this y como segundo un arreglo con los argumentos que recibe la función que llamó a apply.
 
 - functionName.bind(). Recibe como primer y único argumento el this. No ejecuta la función, sólo regresa otra función con el nuevo this integrado.
+
+## array.call()
+```js
+function caminar(metros,direccion){
+  console.log(`${this.name} camina ${metros}m hacia ${direccion}`);
+}
+
+caminar.call(carlos,300,`norte`);
+//print:carlos camina 300m hacia norte
+```
+## array.apply()
+```js
+function caminar(metros,direccion){
+  console.log(`${this.name} camina ${metros}m hacia ${direccion}`);
+}
+
+caminar.aply(carlos,[400,`sur`]);
+//print:carlos camina 400m hacia sur
+
+```
+
+### nota
+```
+.call => comas
+.aply => array
+```
+## array.bind()
+```js
+function caminar(metros,direccion){
+  console.log(`${this.name} camina ${metros}m hacia ${direccion}`);
+}
+
+const carlosCamina = caminar.bind(carlos,[400,`sur`]);
+carlosCamina();
+//print:carlos camina 400m hacia sur
+
+```
+
 
 # Prototype
 
@@ -338,7 +377,11 @@ El Event Loop es un loop que está ejecutando todo el tiempo y pasa periódicame
 
 Para crear las promesas usamos la clase Promise. El constructor de Promise recibe un sólo argumento, un callback con dos parámetros, resolve y reject. resolve es la función a ejecutar cuando se resuelve y reject cuando se rechaza.
 
-El async/await es sólo syntax sugar de una promesa, por debajo es exactamente lo mismo.
+```js
+
+```
+
+**El async/await es sólo syntax sugar de una promesa, por debajo es exactamente lo mismo.**
 
 La clase Promise tiene algunos métodos estáticos bastante útiles:
 
