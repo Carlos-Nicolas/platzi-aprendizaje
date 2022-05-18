@@ -4,6 +4,11 @@
 <p>{{person.age}}</p>
 <button (click)="increaseAge()"> Age++ </button>
 <button (click)="reduceAge()"> Age-- </button>
+<div class="box" (scroll)="onScroll($event)">
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur eum dolore quasi ipsum nesciunt nobis culpa fuga vero officiis cumque, dicta soluta similique veritatis voluptate voluptatem dolores molestias quod nam.</p>
+</div>
+<input type="text" [value]="person.name" (keyup)="changeName($event)"/>
+<p>Nombre {{person.name}}</p>
 
 <h1>Propiedades</h1>
 <button [disabled]="btnDisabled">Enviar</button>
@@ -11,6 +16,7 @@
 <progress max="100" [value]="person.age"></progress>
 <img width="100" [src]="person.avatar" />
 <hr />
+
 <h1>Hola mundo</h1>
 <h2>{{ 'Hola Mundo'.repeat(5) }}</h2>
 <p>3 + 3 = {{ 3 + 3 }}</p>
