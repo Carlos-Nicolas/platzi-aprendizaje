@@ -1,3 +1,10 @@
+<h1>Eventos</h1>
+<button [disabled]="btnDisabled">Enviar</button>
+<button (click)="toggleButton()"> Toggle Button</button>
+<p>{{person.age}}</p>
+<button (click)="increaseAge()"> Age++ </button>
+<button (click)="reduceAge()"> Age-- </button>
+
 <h1>Propiedades</h1>
 <button [disabled]="btnDisabled">Enviar</button>
 <input type="text" [value]="person.name" />
