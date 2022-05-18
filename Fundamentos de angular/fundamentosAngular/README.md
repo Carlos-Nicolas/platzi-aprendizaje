@@ -62,3 +62,26 @@ Puedes modificar el value de un campo de un formulario de la siguiente manera:
 <input [value]="empresa" [disabled]="habilitado"  />
 ```
 Se imprime el valor de la propiedad `empresa` como valor de un `<input>` y gracias a la variable `habilitado` controlas la edición del campo.
+
+
+# Introducción al Event Binding
+
+A lo igual que el Property Binding nos permite modificar el valor de los atributos de los elementos HTML desde el controlador, el `Event Binding` permite controlar los eventos que suceden en estos elementos. El clic de un botón, detectar cambios en un campo, el envío de un formulario, entre otros eventos. Para esto utiliza los paréntesis `()` para el bindeo de la propiedad del elemento.
+
+Si tienes en tu componente:
+```sh
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
+})
+export class AppComponent {
+  enviarFormulario() {
+    // ...
+  }
+}
+```
+Puedes ejecutar el método enviarFormulario() cuando se realiza un clic en un botón de la siguiente manera:
+```sh
+<button (click)="enviarFormulario()" >
+```
