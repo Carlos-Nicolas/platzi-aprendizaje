@@ -85,3 +85,54 @@ Puedes ejecutar el método enviarFormulario() cuando se realiza un clic en un bo
 ```sh
 <button (click)="enviarFormulario()" >
 ```
+# Data binding 
+
+El atributo **ngModel permite el intercambio de datos de forma bidireccional** entre el componente y la vista. Lo que suceda en el componente, se verá reflejado en la vista. Lo que se suceda en la vista, inmediatamente impactará en el componente.
+```sh
+<input [(ngModel)]="name">
+```
+ngModel usar tanto los corchetes `[]` como los paréntesis `()`. De esta manera, se vuelve bidireccional el intercambio de datos. Si no quieres la bidirección, solo colocamos los corchetes `[ngModel]` para que la comunicación sea unidireccional.Para utilizar ngModel, es necesario hacer uso e importar **Angular Forms**. Para esto, dirígete al archivo `app.module.ts` que es el módulo principal de toda aplicación Angular y agrega lo siguiente:
+
+```sh
+...
+import { FormsModule } from '@angular/forms';
+
+@NgModule({
+  declarations: [ ... ],
+  imports: [
+    FormsModule
+  ],
+  providers: [],
+  bootstrap: [ ... ]
+})
+export class AppModule { }
+```
+
+De esta manera puedes importar el módulo `FormsModule` desde `@angular/forms` y agregarlo a `imports` para emplear la propiedad `[(ngModel)]`.
+
+
+# ngif
+
+El condicional `“If”` es un `“If”` en Javascript, en Java, en PHP, en Python o en cualquier lenguaje. Angular posibilita utilizar este condicionante embebido en el HTML para mostrar o no un elemento. Su sintaxis es algo particular, está compuesta por un asterisco seguido de las iniciales características de Angular `“ng”` y la palabra `“If”`.
+
+```sh
+<div *ngIf="isPlatzi">Hola, soy Platzi</div>
+```
+
+Si la condición dentro del `“If”` se cumple, se mostrará el `<div>` con el respectivo contenido dentro. De lo contrario, el usuario no verá dicho elemento en el navegador. En la condición del If `puedes colocar cualquier operador lógico`:
+
+(img)[https://static.platzi.com/media/user_upload/tabla-angular-6ed53829-7208-48e7-8ac1-eb91be5306f2.jpg]
+
+# If … else
+Para usar un `else` en Angular, la sintaxis es algo especial. Debes crear un template en tu código HTML usando la etiqueta que provee Angular llamada `<ng-template>` con una `Variable de Template`, comenzando con `#`, para hacer referencia a este elemento desde tu `If`.
+
+```sh
+<div *ngIf="isPlatzi; else templateElse">Hola, soy Platzi</div>
+<ng-template #templateElse>
+    <div>No soy Platzi</div>
+</ng-template
+```
+
+Si la condición del `If` no se cumple, **seguido de punto y coma**, se coloca la sentencia **else** haciendo referencia a `templateElse`, que es el nombre de la variable del template a mostrar en su lugar.
+
+Aporte creado por: Kevin Fiorentino.
