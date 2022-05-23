@@ -136,3 +136,55 @@ Para usar un `else` en Angular, la sintaxis es algo especial. Debes crear un tem
 Si la condición del `If` no se cumple, **seguido de punto y coma**, se coloca la sentencia **else** haciendo referencia a `templateElse`, que es el nombre de la variable del template a mostrar en su lugar.
 
 Aporte creado por: Kevin Fiorentino.
+
+
+# *ngFor
+
+A lo igual que con un `If`, Angular permite `iterar` un array de números, de cadenas de caracteres o de objetos usando **“*ngFor”**.Si tienes en tu componente un array de datos:
+```sh
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
+})
+export class AppComponent {
+  myArray: string[] = [
+    'Platzi',
+    'es',
+    'genial!'
+  ];
+}
+```
+Puedes mostrar cada elemento iterando el array en un elemento HTML:
+
+
+```sh    
+"let str of myArray">
+        {{ str }}
+    </li>
+>
+```
+El `*ngFor` crea una variable temporal llamada `str` (o el nombre que más te guste) que contiene cada valor de `myArray`. Finalmente, utilizando una interpolación, muestras el valor de **str**.Quedando tu HTML de la siguiente manera:
+```sh
+<li>Platzili><li>esli><li>genial!li>ul>
+```
+## Índice de iteración
+- `ngFor` también cuenta con un `índice `con el número de iteraciones. Puedes acceder a este número agregando al **`ngFor index as i`** de la siguiente manera:
+
+```sh
+"let str of myArray; index as i">
+        {{ i }}. {{ str }}
+    </li>
+>
+
+```
+Cada iteración contiene una variable `i` con el índice que le corresponde. Iniciando desde cero, da como resultado:
+```sh
+<ul>
+    <li>0. Platzi </li>
+    <li>1. es </li>
+    <li>2. genial </li>
+</ul>
+```
+
+# *ngFor para arrays

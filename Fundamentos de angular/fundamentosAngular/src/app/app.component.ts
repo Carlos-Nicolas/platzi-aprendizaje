@@ -16,6 +16,12 @@ export class AppComponent {
     age: 18,
     avatar: 'https://www.w3schools.com/howto/img_avatar.png'
   }
+
+
+  names: Array<string>=['carlos','nicolas','santiago',];
+  newName ='';
+
+
   toggleButton(){
     this.btnDisabled = !this.btnDisabled;
   };
@@ -36,4 +42,14 @@ export class AppComponent {
    this.person.name  = element.value;
 
   }
+
+  addName(){
+    this.names.push(this.newName);
+    this.newName='';
+  }
+
+  deleteName(index: number) {
+    this.names.splice(index, 1);
+  }
+
 }

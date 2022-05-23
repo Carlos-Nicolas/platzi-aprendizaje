@@ -1,20 +1,31 @@
+<h1>ngFor</h1>
+<input type="text" required [(ngModel)]="newName" />
+<button (click)="addName()">Add Name</button>
+<ul>
+  <li *ngIf="names.length === 0"> No hay Nombres </li>
+  <li *ngFor="let name of names; index as i ">
+    {{i}} {{name}}
+    <button (click)="deleteName(i)">Delete</button>
+  </li>
+</ul>
+<hr />
 <h1>ngIF</h1>
-<input type="text" [(ngModel)]="person.name" (keyup)="changeName($event)"/>
+<input type="text" [(ngModel)]="person.name" (keyup)="changeName($event)" />
 <p *ngIf="person.name == 'nicolas' ">soy Nico</p>
-<p *ngIf="person.name == 'julian' && person.age === 18 ; else elseBlock">soy juli</p>
-<ng-template #elseBlock>
-<p>Bloque else</p>
+<p *ngIf="person.name == 'julian' && person.age === 18 ; else myBlock">soy juli</p>
+<ng-template #myBlock>
+  <p>Bloque else</p>
 </ng-template>
 
-<hr/>
+<hr />
 <h1>NgModel</h1>
-  <p>Nombre {{person.name}}</p>
-<input type="text" #nameInput="ngModel" [(ngModel)]="person.name" (keyup)="changeName($event)"/>
+<p>Nombre {{person.name}}</p>
+<input type="text" #nameInput="ngModel" [(ngModel)]="person.name" (keyup)="changeName($event)" />
 <p>valid: {{nameInput.valid}}</p>
 <p>Age {{person.age}}</p>
-<input type="number" max="18" min="10" #ageInput="ngModel" [(ngModel)]="person.age" (keyup)="changeName($event)"/>
+<input type="number" max="18" min="10" #ageInput="ngModel" [(ngModel)]="person.age" (keyup)="changeName($event)" />
 <p>valid: {{ageInput.valid}}</p>
-<hr/>
+<hr />
 <h1>Eventos</h1>
 <button [disabled]="btnDisabled">Enviar</button>
 <button (click)="toggleButton()"> Toggle Button</button>
@@ -22,11 +33,12 @@
 <button (click)="increaseAge()"> Age++ </button>
 <button (click)="reduceAge()"> Age-- </button>
 <div class="box" (scroll)="onScroll($event)">
-  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur eum dolore quasi ipsum nesciunt nobis culpa fuga vero officiis cumque, dicta soluta similique veritatis voluptate voluptatem dolores molestias quod nam.</p>
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur eum dolore quasi ipsum nesciunt nobis culpa
+    fuga vero officiis cumque, dicta soluta similique veritatis voluptate voluptatem dolores molestias quod nam.</p>
 </div>
-<input type="text" [value]="person.name" (keyup)="changeName($event)"/>
+<input type="text" [value]="person.name" (keyup)="changeName($event)" />
 <p>Nombre {{person.name}}</p>
-<hr/>
+<hr />
 <h1>Propiedades</h1>
 <button [disabled]="btnDisabled">Enviar</button>
 <input type="text" [value]="person.name" />
