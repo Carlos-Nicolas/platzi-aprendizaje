@@ -1,14 +1,40 @@
-<h1>ngFor objects</h1>
-<div>
+<h1>*ngSwitch</h1>
+<input type="text" required [(ngModel)]="person.name" />
+<div [ngSwitch]="person.name">
+  <p *ngSwitchCase="'carlos'">
+    la persona es carlos
+  </p>
+  <p *ngSwitchCase="'nicolas'">
+    la persona es nicolas
+  </p>
+  <p *ngSwitchCase="'santiago'">
+    la persona es santiago
+  </p>
+  <p *ngSwitchDefault>
+    No hace match
+  </p>
+</div>
+
+<!-- <p *ngIf=" person.name === 'carlos'">
+  la persona es carlos
+</p>
+<p *ngIf=" person.name === 'nicolas'">
+  la persona es nicolas
+</p>
+<p *ngIf=" person.name === 'santiago'">
+  la persona es santiago
+</p> -->
+<hr />
+<h1>*ngFor objects</h1>
+<div class="products--grid">
   <div *ngFor=" let product of products">
-    <img  width="250" [src]="product.image" alt="image">
+    <img  [src]="product.image" alt="image">
     <h2>{{product.price}}</h2>
     <p>{{product.name}}</p>
   </div>
 </div>
-
-<hr/>
-<h1>ngFor</h1>
+<hr />
+<h1>*ngFor</h1>
 <input type="text" required [(ngModel)]="newName" />
 <button (click)="addName()">Add Name</button>
 <ul>
@@ -60,4 +86,4 @@
 <h2>{{ 'Hola Mundo'.repeat(5) }}</h2>
 <p>3 + 3 = {{ 3 + 3 }}</p>
 <h3>Hola, soy {{ name }} y tengo {{ age }}</h3>
-<img src={{img}} alt="image">
+<img width="100"src={{img}} alt="image">

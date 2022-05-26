@@ -256,3 +256,58 @@ peopleArray: Person[] = [
     ...
  ]
 ```
+
+# ngSwitch
+
+Angular también ofrece la sentencia `*ngSwitch` y `*ngSwitchCase` para determinar el flujo de control de tu aplicación y qué elemento mostrar entre multiples elementos HTML. Además de utilizar un elemento default con `*ngSwitchDefault` en caso de que ninguna condición se cumpla.
+
+```sh
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
+})
+export class AppComponent {
+    color: string = 'verde';
+}
+```
+
+## Ejemplo de *ngSwitchCase
+
+```sh
+<div [ngSwitch]="color">
+    <p *ngSwitchCase="'azul'">
+        El color el Azul
+    </p>
+    <p *ngSwitchCase="'verde'">
+        El color el Verde
+    </p>
+    <p *ngSwitchCase="'rojo'">
+        El color el Rojo
+    </p>
+    <p *ngSwitchDefault>
+        No hay ningún color
+    </p>
+</div>
+```
+
+
+# Class binding
+
+La versatilidad de Angular te permite **agregar o quitar clases y estilos** a tus elementos HTML a partir de condicionantes. Así como anteriormente utilizaste los corchetes `[]` para bindear atributos como el `[src]` de una imagen o el `[href]` de un enlace, puedes bindear clases para que Angular las agregue o quite dinámicamente si se cumple una condición de la siguiente manera:
+
+```sh
+<div [class.active-color]="isActive">
+</div>
+```
+
+Imagina que tienes en tu componente una propiedad llamada `isActive` que agregará la clase `active-color` si esta es verdadera o quitará la clase si es falsa. Luego ya puedes darle los estilos que más te gusten al elemento HTML en tu hoja de estilos utilizando la clase `active-color`.
+
+# Style binding
+
+También puedes añadir estilos inline a los elementos HTML bindeando la propiedad `[style]` seguido de la propiedad CSS que quieres modificar dinámicamente:
+
+```sh
+<p [style.color]="isActive ? 'blue' : 'red'"></p>
+```
+A partir del valor de `isActive`, dependiendo si este es verdadero o falso, puedes emplear un operador ternario para cambiar el `color` del párrafo.
