@@ -311,3 +311,36 @@ También puedes añadir estilos inline a los elementos HTML bindeando la propied
 <p [style.color]="isActive ? 'blue' : 'red'"></p>
 ```
 A partir del valor de `isActive`, dependiendo si este es verdadero o falso, puedes emplear un operador ternario para cambiar el `color` del párrafo.
+
+
+#  NgClass y NgStyle
+
+Con el binding de `[class]` y `[style]` puedes agregar clases y estilos fácilmente. Pero se vuelve algo complicado en el caso de que necesites agregar varias clases o modificar muchos estilos. Es por esto que Angular ofrece las directivas `ngClass` y `ngStyle` para este propósito.
+
+Puedes bindear la directiva `[ngStyle]` o `[ngClass]` y pasarle un objeto con cada propiedad o clase que deseas agregar:
+
+```sh
+<p
+    [ngStyle]="{
+        'color': textColor,
+        'background': textBackground
+    }"
+></p>
+```
+
+El operador ternario será tu mejor aliado para agregar o quitar clases y estilos:
+
+```sh
+<div
+    [ngClass]="isAvailable ? 'active-class' : 'deactivate-class'"
+></div>
+```
+
+O puedes usar las Interpolaciones en lugar del binding:
+
+```sh
+
+<p
+    ngClass="{{ isAvailable ? 'active-class' : 'deactivate-class' }}"
+></p>
+```

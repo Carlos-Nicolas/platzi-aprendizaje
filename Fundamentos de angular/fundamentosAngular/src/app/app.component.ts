@@ -5,7 +5,9 @@ import {IProduct} from './product.model';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
+
 export class AppComponent {
+  widthImg = 10;
   title = 'fundamentosAngular';
   name = 'Nicolas';
   age = 18;
