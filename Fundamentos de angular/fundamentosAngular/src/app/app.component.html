@@ -1,26 +1,26 @@
 <h1>Formulario</h1>
 <form (ngSubmit)="onRegistrer()" #myForm="ngForm">
-<div class="input-group">
-  <label for="name">Name
-  </label>
-  <input type="text" name="name" required id="name" [(ngModel)]="register.name">
-  <p>Mensajes de error</p>
-</div>
-<div class="input-group">
-  <label for="email">Email
-  </label>
-  <input type="email" name="email" required id="email" [(ngModel)]="register.email">
-  <p>Mensajes de error</p>
-</div>
-<div class="input-group">
-  <label for="password">password
-  </label>
-  <input type="password" name="password" required id="password" [(ngModel)]="register.password">
-  <p>Mensajes de error</p>
-</div>
-<button [disabled]="myForm.invalid" type="submit">Registrar</button>
+  <div class="input-group">
+    <label for="name">Name
+    </label>
+    <input type="text" name="name" required id="name" [(ngModel)]="register.name">
+    <p>Mensajes de error</p>
+  </div>
+  <div class="input-group">
+    <label for="email">Email
+    </label>
+    <input type="email" name="email" required id="email" [(ngModel)]="register.email">
+    <p>Mensajes de error</p>
+  </div>
+  <div class="input-group">
+    <label for="password">password
+    </label>
+    <input type="password" name="password" required id="password" [(ngModel)]="register.password">
+    <p>Mensajes de error</p>
+  </div>
+  <button [disabled]="myForm.invalid" type="submit">Registrar</button>
 </form>
-<hr/>
+<hr />
 
 
 <h1>NgClass y NgStyle</h1>
@@ -28,7 +28,7 @@
 <hr class="line-error" [ngClass]="{
   'valid': nameInput4.valid,
   'invalid': nameInput4.invalid
-}"/>
+}" />
 <p class="message-error" [class.invalid]="nameInput2.invalid">
   el campo es requerido
 </p>
@@ -36,9 +36,9 @@
 <div class="styles">
   <div>
 
-<input type="number" [(ngModel)]="box.height" />
-<input type="number" [(ngModel)]="box.width" />
-<input type="color" [(ngModel)]="box.background" />
+    <input type="number" [(ngModel)]="box.height" />
+    <input type="number" [(ngModel)]="box.width" />
+    <input type="color" [(ngModel)]="box.background" />
   </div>
   <div>
     <div [ngStyle]="{
@@ -51,7 +51,7 @@
   </div>
 </div>
 
-<hr/>
+<hr />
 <h1>class & style</h1>
 <input type="text" required #nameInput2="ngModel" [(ngModel)]="person.name" />
 <p class="message-error" [class.invalid]="nameInput2.invalid">
@@ -66,10 +66,10 @@
     <input type="text" [(ngModel)]="widthImg" />
   </div>
   <div>
-    <img [src]="person.avatar" [style.width.px]="widthImg" alt="image" >
+    <img [src]="person.avatar" [style.width.px]="widthImg" alt="image">
   </div>
 </div>
-<hr/>
+<hr />
 
 <h1>*ngSwitch</h1>
 <input type="text" required [(ngModel)]="person.name" />
@@ -101,7 +101,7 @@
 <h1>*ngFor objects</h1>
 <div class="products--grid">
   <div *ngFor=" let product of products">
-    <img  [src]="product.image" alt="image">
+    <img [src]="product.image" alt="image">
     <h2>{{product.price}}</h2>
     <p>{{product.name}}</p>
   </div>
@@ -159,4 +159,4 @@
 <h2>{{ 'Hola Mundo'.repeat(5) }}</h2>
 <p>3 + 3 = {{ 3 + 3 }}</p>
 <h3>Hola, soy {{ name }} y tengo {{ age }}</h3>
-<img width="100"src={{img}} alt="image">
+<img width="100" src={{img}} alt="image">
