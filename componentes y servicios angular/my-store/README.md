@@ -125,3 +125,83 @@ Otra manera de utilizar la directiva `@Input` es de la siguiente manera:
 Observa que en esta oportunidad, cada vez que se envía un valor al `@Input`, se ejecutará la función `saludar()` que recibe como parámetro el valor que se le haya enviado.
 
 De esta manera, puedes ejecutar la lógica que necesites dentro de esta función cada vez que el valor del `@Input` cambia.
+
+
+# Uso de Outputs
+
+Así como el decorador `@Input` permite el envío de información desde un componente padre hacia un componente hijo, el uso de `@Outputs` permite lo contrario.
+
+## Comunicación hijo a padre
+
+A partir de la emisión de un evento, el decorador `@Output()` **permite enviar mensajes desde un componente hijo hacia el padre.**
+
+## Envío del mensaje
+
+Para esto, se hace uso de la clase `EventEmitter` importándola desde `@angular/core`, para crear en tu componente una propiedad emisora de eventos.
+
+```js
+
+import { Component, Output, EventEmitter } from '@angular/core';
+
+@Component({
+  selector: 'app-test-name',
+  templateUrl: './test-name.component.html',
+  styleUrls: ['./test-name.component.less']
+})
+export class TestNameComponent {
+
+  @Output() message = new EventEmitter<string>();
+
+  constructor() { }
+}
+```
+
+
+Decorando la propiedad con el `@Output()` y creando una instancia de `EventEmitter` podrás emitir un evento de la siguiente manera:
+
+```js
+...
+    eventEmitter() {
+        this.message.emit('Hola soy Platzi');
+    }
+
+```
+
+
+Llamando al método `emit()` de la instancia `EventEmitter`, se enviará el valor al componente padre que se encuentre escuchando el evento.
+
+## Recepción del mensaje
+
+Desde el componente padre, inicializa el componente hijo de la siguiente manera:
+
+```html
+<app-test-name>
+    (message)="recibirMensaje($event)"
+</app-test-name>
+
+```
+
+Se “bindea” la propiedad emisora de eventos con '()' y se le pasa una función que se ejecutará cada vez que emita un evento.
+Y en el componente padre:
+
+
+```js
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-father',
+  templateUrl: './father.component.html',
+  styleUrls: ['./father.component.less']
+})
+export class FatherComponent {
+
+  constructor() { }
+  
+  recibirMensaje(event: Event) {
+    console.log(event);
+  }
+}
+```
+
+La función `recibirMensaje()` posee un parámetro del tipo `Event` que contendrá el mensaje del componente hijo.
+
