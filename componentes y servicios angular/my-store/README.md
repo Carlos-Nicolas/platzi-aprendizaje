@@ -11,7 +11,6 @@ Puedes crear tu primer componente en Angular utilizando el comando `ng generate 
 - **my-test-name.component.css**
 - **my-test-name.component.spec.ts**
 
-
 Observa el archivo `.html` que será el template que tu componente utilizará. El archivo `.ts` que contiene el código TypeScript y la lógica. El archivo `.css` que contiene los estilos. Si escogiste trabajar con un preprocesador de CSS, este archivo puede ser `.scss`, `.sass` o `.less`. Finalmente, el archivo más extraño, `.spec.ts` que contiene el código de las pruebas unitarias que puedes escribir para automatizar el testing en tu componente.
 
 Angular también importará automáticamente el componente creado en el archivo `app.module.ts` para que automáticamente puedas utilizarlo en tu aplicación.
@@ -32,12 +31,10 @@ import { TestNameComponent } from './test-name/test-name.component';
 export class AppModule { }
 ```
 
-
-
 # Partes de un componente Angular
 
-
 El archivo con la extensión `.ts` es el principal de cualquier componente Angular.
+
 ```sh
 import { Component } from '@angular/core';
 
@@ -57,30 +54,30 @@ Observa lo más importante, el decorador `@Component()`. Los decoradores **alter
 
 Para comunicar componentes, Angular hace uso de decoradores para **intercambiar información** entre un componente padre hacia un componente hijo y viceversa.
 
-
-##  Comunicando componentes
+## Comunicando componentes
 
 Para enviar información de padre a hijo, puedes utilizar el decorador `@Input()` para marcar una propiedad de una clase como punto de entrada de un dato.
 
 ```html
-<p style=‘text-align:center;’>
-<img src=“https://cdn.document360.io/da52b302-22aa-4a71-9908-ba18e68ffee7/Images/Documentation/Screenshot from 2022-04-05 22-42-58.png” alt=“Envio de datos componente padre a hijo”>
+<p style="‘text-align:center;’">
+  <img
+  src=“https://cdn.document360.io/da52b302-22aa-4a71-9908-ba18e68ffee7/Images/Documentation/Screenshot
+  from 2022-04-05 22-42-58.png” alt=“Envio de datos componente padre a hijo”>
 </p>
 ```
 
 ```js
-import { Component, Input } from '@angular/core';
+import { Component, Input } from "@angular/core";
 
 @Component({
-  selector: 'app-test-name',
-  templateUrl: './test-name.component.html',
-  styleUrls: ['./test-name.component.less']
+  selector: "app-test-name",
+  templateUrl: "./test-name.component.html",
+  styleUrls: ["./test-name.component.less"],
 })
 export class TestNameComponent {
-
   @Input() firstname: string;
 
-  constructor() { }
+  constructor() {}
 }
 ```
 
@@ -89,9 +86,7 @@ Debes importar `Input` desde `@angular/core` para poder utilizar esta directiva 
 Podrás inicializar el componente desde su padre y pasarle los inputs que este necesite de la siguiente manera:
 
 ```html
-<app-test-name>
-    firstname="Platzi"
-</app-test-name>
+<app-test-name> firstname="Platzi" </app-test-name>
 ```
 
 También puedes cambiar el nombre el Input especificando el nombre de la propiedad que quieras que este utilice al inicializar el componente.
@@ -103,9 +98,7 @@ También puedes cambiar el nombre el Input especificando el nombre de la propied
 ```
 
 ```html
-<app-test-name>
-    my-name="Platzi"
-</app-test-name>
+<app-test-name> my-name="Platzi" </app-test-name>
 ```
 
 ## Data binding en Inputs
@@ -125,7 +118,6 @@ Otra manera de utilizar la directiva `@Input` es de la siguiente manera:
 Observa que en esta oportunidad, cada vez que se envía un valor al `@Input`, se ejecutará la función `saludar()` que recibe como parámetro el valor que se le haya enviado.
 
 De esta manera, puedes ejecutar la lógica que necesites dentro de esta función cada vez que el valor del `@Input` cambia.
-
 
 # Uso de Outputs
 
@@ -156,7 +148,6 @@ export class TestNameComponent {
 }
 ```
 
-
 Decorando la propiedad con el `@Output()` y creando una instancia de `EventEmitter` podrás emitir un evento de la siguiente manera:
 
 ```js
@@ -167,7 +158,6 @@ Decorando la propiedad con el `@Output()` y creando una instancia de `EventEmitt
 
 ```
 
-
 Llamando al método `emit()` de la instancia `EventEmitter`, se enviará el valor al componente padre que se encuentre escuchando el evento.
 
 ## Recepción del mensaje
@@ -175,28 +165,23 @@ Llamando al método `emit()` de la instancia `EventEmitter`, se enviará el valo
 Desde el componente padre, inicializa el componente hijo de la siguiente manera:
 
 ```html
-<app-test-name>
-    (message)="recibirMensaje($event)"
-</app-test-name>
-
+<app-test-name> (message)="recibirMensaje($event)" </app-test-name>
 ```
 
 Se “bindea” la propiedad emisora de eventos con '()' y se le pasa una función que se ejecutará cada vez que emita un evento.
 Y en el componente padre:
 
-
 ```js
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'app-father',
-  templateUrl: './father.component.html',
-  styleUrls: ['./father.component.less']
+  selector: "app-father",
+  templateUrl: "./father.component.html",
+  styleUrls: ["./father.component.less"],
 })
 export class FatherComponent {
+  constructor() {}
 
-  constructor() { }
-  
   recibirMensaje(event: Event) {
     console.log(event);
   }
@@ -204,7 +189,6 @@ export class FatherComponent {
 ```
 
 La función `recibirMensaje()` posee un parámetro del tipo `Event` que contendrá el mensaje del componente hijo.
-
 
 ## Comunicando componente padre a hijo
 
@@ -215,10 +199,10 @@ Un ejemplo real para el uso de la comunicación entre **componente** podría ser
 ```js
 // interfaces/producto.interface.ts
 export interface Producto {
-    id: number;
-    name: string;
-    precio: number;
-    image: string;
+  id: number;
+  name: string;
+  precio: number;
+  image: string;
 }
 ```
 
@@ -268,21 +252,19 @@ export class CatalogoComponent {
 ></app-producto>
 ```
 
-
 **Paso 4:** Finalmente, el componente hijo recibe el producto haciendo uso del decorador `@Input()` y apoyándose también de la interfaz para tipear los datos.
 
 ```js
 // components/producto/producto.component.ts
-import { Component, Input } from '@angular/core';
-import { Producto } from './producto.interface.ts';
+import { Component, Input } from "@angular/core";
+import { Producto } from "./producto.interface.ts";
 
 @Component({
-  selector: 'app-producto',
-  templateUrl: './producto.component.html',
-  styleUrls: ['./producto.component.scss']
+  selector: "app-producto",
+  templateUrl: "./producto.component.html",
+  styleUrls: ["./producto.component.scss"],
 })
 export class ProductoComponent {
-
   @Input() producto: Producto;
 }
 ```
@@ -292,22 +274,21 @@ Pudiendo mostrar la información del producto en el template del componente hijo
 ```html
 <!-- components/producto/producto.component.html -->
 <div>
-    <h2>{{ producto.name }}</h2>
-    <img [src]="producto.image">
-    <p>Precio: {{ producto.precio }}</p>
+  <h2>{{ producto.name }}</h2>
+  <img [src]="producto.image" />
+  <p>Precio: {{ producto.precio }}</p>
 </div>
 ```
-Será habitual tener la necesidad en tus proyectos de construir componentes más grandes o “contenedores” de muchos otros componentes repetitivos y más pequeños. Es importante buscar este desacople entre componentes de la mejor manera posible.
 
+Será habitual tener la necesidad en tus proyectos de construir componentes más grandes o “contenedores” de muchos otros componentes repetitivos y más pequeños. Es importante buscar este desacople entre componentes de la mejor manera posible.
 
 # Ciclo de vida de componentes
 
 **Un componente pasa por varias etapas en su ciclo de vida.** A través de hooks, puedes realizar una determinada acción cuando el componente es inicializado, cuando se dispara un evento, cuando se detecta un cambio, cuando el componente es destruido, etc.
 
+## Hooks más utilizados
 
- ## Hooks más utilizados
-
- ## Constructor
+## Constructor
 
 Como en toda clase en la programación orientada a objetos, el `constructor` es quien crea la instancia del objeto y sus dependencias.
 
@@ -321,7 +302,6 @@ El hook `ngOnChanges()` se dispara cada vez que se produce un cambio de estado e
 - Se ejecuta N cantidad de veces antes y durante el render del componente.
 - Puede emplearse para procesos asincrónicos.
 
-
 ## ngOnInit
 
 Es el hook más usado, `ngOnInit()` es ideal para cualquier solicitud de datos asincrónicos a una API para preparar el componente antes de renderizarlo.
@@ -329,14 +309,13 @@ Es el hook más usado, `ngOnInit()` es ideal para cualquier solicitud de datos a
 - Únicamente se ejecuta una vez, antes del render del componente.
 - Puede usarse para procesos asincrónicos.
 
-
 ## ngAfterViewInit
 
 Este hook únicamente se ejecuta una vez cuando el render del componente haya finalizado. Puede serte útil para realizar acciones programáticas que requieran que todo el HTML del componente ya este preparado.
 
 - Únicamente se ejecuta una vez después del render del componente.
 
-##  ngOnDestroy
+## ngOnDestroy
 
 Finalmente, `ngOnDestroy()` se ejecutará cuando el componente es destruido, o sea, cuando ya no existe en la interfaz del navegador. Suele utilizarse para liberar espacios de memoria que el componente requiera.
 
@@ -344,51 +323,48 @@ Finalmente, `ngOnDestroy()` se ejecutará cuando el componente es destruido, o s
 
 Los hooks de ciclo de vida de Angular, son interfaces que tienen que importarse desde `@angular/core` para implementarlos en la clase y así detectar los cambios en cada evento.
 
-
-
 ```js
-import { Component, OnInit, AfterContentInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, AfterContentInit, OnDestroy } from "@angular/core";
 
 @Component({
-  selector: 'app-test-name',
-  templateUrl: './test-name.component.html',
-  styleUrls: ['./test-name.component.less']
+  selector: "app-test-name",
+  templateUrl: "./test-name.component.html",
+  styleUrls: ["./test-name.component.less"],
 })
 export class TestNameComponent implements OnInit, AfterContentInit, OnDestroy {
-
   constructor() {
-    console.log('1. Primero sucederá esto');
+    console.log("1. Primero sucederá esto");
   }
 
   ngOnInit(): void {
-    console.log('2. Luego esto');
+    console.log("2. Luego esto");
   }
-  
+
   ngAfterViewInit(): void {
-    console.log('3. Seguido de esto');
+    console.log("3. Seguido de esto");
   }
-  
+
   ngOnDestroy(): void {
-    console.log('4. Finalmente esto (cuando el componente sea destruido)');
+    console.log("4. Finalmente esto (cuando el componente sea destruido)");
   }
-  
 }
-``` 
+```
 
 Cada hook tiene sus características y utilidades recomendadas dependiendo lo que necesitas hacer.
 Es importante seguir estas recomendaciones para buscar optimizar el rendimiento de tu aplicación.
-
 
 # ngDestroy & SetInput
 
 El hook `ngOnDestroy() & SetInput` tiene una importancia clave para el cuidado de nuestra aplicación. **Su funcionalidad más importante es la liberación de espacio** en memoria de variables para que no se acumule. Si esto llegara a suceder en tu aplicación, la misma podría volverse lenta y tosca a medida que toda la memoria del navegador es ocupada.
 
 ## Liberando espacio de memoria
+
 Todo el ecosistema Angular está basado en observables para el manejo asincrónico.
 
 Cada vez que utilices un `subscribe()` para escuchar la respuesta de algún evento asincrónico (por ejemplo, el llamado a una API), es relevante realizar el respectivo `unsubscribe()` para liberar ese espacio en memoria.
 
 ## RxJS
+
 RxJS (Reactive Extensions Library for JavaScript) es una popular librería de Javascript para el manejo de observables. Si trabajas con Angular esta librería será tu mejor amiga.
 
 Observa el siguiente ejemplo donde primero se importa `Subscription` desde `rxjs` para tipar la variable `suscription`. Guardamos el observable para posteriormente darlo de baja. También importamos `interval` que devuelve el observable y genera un contador que emite una pulsación, en este ejemplo, cada 1000 milisegundos.
@@ -426,4 +402,81 @@ Si nuestro código acabara aquí, cuando el componente es destruido, el contador
 
 Para solucionar esto, guardamos en `this.suscription` el observable del contador y en `ngOnDestroy()` y llamamos al método `.unsubscribe()` para detener el contador.
 
+# Conociendo los servicios
 
+**Un servicio es la forma que utiliza Angular para modular una aplicación y crear código reutilizable**, este tendrá una determinada lógica de negocio que puede ser usada por varios componentes u otros servicios.
+
+## Tu primer servicio
+
+Con el CLI de Angular, crea un servicio fácilmente con el comando `ng generate service test-name` o en su manera corta `ng g s test-name`. Dicho comando creará dos archivos:
+
+- test-name.service.ts
+- test-name.service.spec.ts
+
+Siendo el archivo `.ts` el servicio en sí y el archivo `.spec.ts` el que podrás usar para escribir pruebas unitarias para testear el servicio.
+
+El servicio tendrá por defecto el siguiente código:
+
+```js
+import { Injectable } from "@angular/core";
+@Injectable({
+  providedIn: "root",
+})
+export class TestNameService {
+  constructor() {}
+}
+```
+
+Haz visto anteriormente los decoradores en Angular. Así como los componentes usan el decorador `@Component()`, los servicios utilizan `@Injectable()`.
+
+## Utilizando un servicio
+
+**Paso 1:** Agrégale al servicio algo de lógica, por ejemplo, una variable con un determinado valor para ser leído a través de un método:
+
+```js
+import { Injectable } from '@angular/core';
+@Injectable({
+  providedIn: 'root'
+})
+export class TestNameService {
+  private testName = 'Hola Platzi';
+
+  constructor() { }
+
+  getTestName(): string {
+    return this.testName;
+  }
+}
+```
+
+**Paso 2:** Luego, importa en un componente el servicio de la siguiente manera:
+
+```js
+// components/catalogo/catalogo.component.ts
+import { TestNameService } from 'src/app/services/test-name.service';
+
+@Component({
+  selector: 'app-catalogo',
+  templateUrl: './catalogo.component.html',
+  styleUrls: ['./catalogo.component.scss']
+})
+export class CatalogoComponent implements OnInit {
+
+  // ...
+
+  constructor(
+    private testNameService: TestNameService,
+  ) { }
+
+  ngOnInit(): void {
+    const name = this.testNameService.getTestName();
+    console.log(name);
+  }
+}
+```
+
+En el constructor del componente, se inyecta el servicio para poder ser utilizado posteriormente.
+
+En este ejemplo, estamos llamando en el `ngOnInit()` el método `getTestName()` del servicio para obtener el valor de una variable e imprimirla por consola.
+
+De esta manera, puedes tener tu lógica de negocio en un servicio e importar este en N componentes, o incluso en otros servicios y acceder a sus métodos y propiedades.
