@@ -52,4 +52,5 @@ export class ProductsComponent implements OnInit {
      this.storeService.addProduct(product)
      this.total = this.storeService.getTotal();
   }
+
 }
