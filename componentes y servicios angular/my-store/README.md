@@ -707,3 +707,10 @@ Los pipes se utilizan fácilmente en el HTML haciendo uso del carácter “|” 
 En los ejemplos anteriores, se mostrará en la vista el testo `HOLA SOY PLATZI` completamente en mayúscula y el número `1000` en formato `$1,000.00.` En algunos casos, los pipes reciben parámetros de configuración, como el caso del pipe `currency` que recibe `:'USD'` para indicar el tipo de divisa.
 
 
+# Construyendo tu propio pipe
+
+Para poder afirmar que estás **construyendo tu propio Pipe**, es necesario hacer uso del CLI de Angular con el comando `ng generate pipe test-name` o en su forma corta con `ng g p test-name`.
+
+## Mi primer “pipe” en Angular
+
+De la misma manera que lo hace con los servicios y componentes, el CLI creará un archivo `.ts` que contiene el código del pipe y un archivo .spec.ts para sus respectivas pruebas unitarias.
