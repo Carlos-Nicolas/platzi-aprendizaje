@@ -1,6 +1,6 @@
 <div class="show-mobile">
   <div>
-    <button (click)="toggleMenu()" >
+    <button (click)="toggleMenu()">
       <img src="./assets/svg/icon_menu.svg" alt="menu">
     </button>
     <a href="">
@@ -11,9 +11,7 @@
     </a>
   </div>
   <div class="side-menu" [class.active]="activeMenu">
-    <button (click)="toggleMenu()">
-      Close
-    </button>
+    <button (click)="toggleMenu()">Close</button>
     <ul>
       <li><a href="">All</a></li>
       <li><a href="">Clothes</a></li>
@@ -35,10 +33,11 @@
     </nav>
     <div class="info">
       <div class="account">nicolas@nicolas.com</div>
-      <div>
+      <div class="cart">
         <a href="">
           <img src="./assets/svg/icon_shopping_cart.svg" alt="logo">
         </a>
+        <span class="counter">{{ counter }}</span>
       </div>
     </div>
   </div>
