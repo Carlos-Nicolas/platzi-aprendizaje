@@ -928,3 +928,27 @@ export class NavBarComponent implements OnInit, OnDestroy {
 El lugar más apropiado para esto es en `ngOnInit()`. No olvides guardar este observable en una propiedad del tipo `Subscription` para hacer un `unsubscribe()` cuando el componente sea destruido.
 
 
+# Guia de estilos de Angular y linters
+
+Angular posee una **guia de estilos de Angular y linters de [buenas prácticas](https://angular.io/guide/styleguide#naming)** que recomienda seguir en todos los proyectos que desarrolles con este framework. Estas son pautas que te ayudarán en la declaración de variables, nombre de archivos, nombres de funciones, sintaxis, etc.
+
+
+## Estilos de codificación
+
+Con el comando `ng add @angular-eslint/schematics` podrás realizar la instalación automática de las herramientas que proporciona Angular, para inspeccionar tu código fuente en busca de incumplimientos a sus reglas.
+
+```sh
+TIP: Instala la extensión “ESLint” en tu editor de texto o IDE de preferencia
+```
+
+Una vez realizado este paso, es momento de evaluar el cumplimiento o no de esta guía de estilos. El comando `ng lint` arrojará por consola una lista de errores que la aplicación no cumple y que es necesario corregir.
+
+También puedes modificar e implementar tus propias reglas de codificación editando el archivo `.eslintrc.json` que fue creado en la raíz del proyecto.
+
+## La importancia del Linter
+
+Que el código fuente cumpla con un determinado estándar de codificación es muy importante en aplicaciones profesionales. Algunas empresas toman la decisión de que el código fuente no llegue a producción si este no cumple con las reglas de estilos.
+
+Es conveniente planificar a futuro la escalabilidad de una aplicación, ya que los estilos de codificación, influyen en la calidad de cualquier software a largo plazo.
+
+El desafío para las y los profesionales del software, está en escribir un código fuente sólido y en adaptarse a las reglas de codificación de cualquier proyecto del que hagas parte.
